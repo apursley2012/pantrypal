@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#DDFBF7"/><stop offset="1" stop-color="#ffffff"/></linearGradient></defs>
+<rect width="800" height="600" rx="48" fill="url(#g)"/>
+<circle cx="650" cy="90" r="115" fill="#03D2BB" opacity=".18"/><circle cx="92" cy="520" r="140" fill="#03D2BB" opacity=".10"/>
+<ellipse cx="400" cy="405" rx="245" ry="66" fill="#011A42" opacity=".12"/>
+<path d="M235 350 Q400 500 565 350 L530 455 Q400 535 270 455Z" fill="#03D2BB" stroke="#011A42" stroke-width="18" stroke-linejoin="round"/>
+<path d="M290 340 Q400 250 510 340" fill="none" stroke="#011A42" stroke-width="18" stroke-linecap="round"/>
+<circle cx="342" cy="320" r="36" fill="#9FEA37" stroke="#011A42" stroke-width="10"/><circle cx="417" cy="290" r="42" fill="#FD8E03" stroke="#011A42" stroke-width="10"/><circle cx="465" cy="345" r="33" fill="#D52959" stroke="#011A42" stroke-width="10"/>
+<path d="M380 244 l-14 -65 M422 245 l28 -62" stroke="#03D2BB" stroke-width="16" stroke-linecap="round"/>
+<text x="44" y="92" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="800" fill="#011A42">Lunch</text>
+<text x="44" y="139" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700" fill="#011A42" opacity=".72">PantryPal recipe image</text>
+</svg>
