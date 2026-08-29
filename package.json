@@ -1,0 +1,13 @@
+{
+  "name": "pantrypal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ingredient-first meal planning and kitchen inventory web app.",
+  "scripts": {
+    "start": "servor --reload",
+    "serve": "servor"
+  },
+  "devDependencies": {
+    "servor": "^4.0.2"
+  }
+}
