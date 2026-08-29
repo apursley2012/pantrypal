@@ -1,0 +1,16 @@
+{
+  "name": "PantryPal",
+  "short_name": "PantryPal",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#03D2BB",
+  "icons": [
+    {
+      "src": "assets/pantrypal-app-icon.png",
+      "sizes": "1254x1254",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}
