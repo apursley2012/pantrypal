@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Credits | PantryPal</title>
+  <meta name="description" content="Photo sources and licenses for recipe photography displayed in PantryPal." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://www.themealdb.com">
+  <link rel="preconnect" href="https://api.openverse.org">
+  <link rel="preconnect" href="https://commons.wikimedia.org">
+  <link rel="icon" type="image/png" href="assets/pantrypal-app-icon.png" />
+  <link rel="apple-touch-icon" href="assets/pantrypal-app-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#23738D" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="theme-08-playful-poster" data-page="credits">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="PantryPal home">
+      <img src="assets/pantrypal-nav-exact.png" alt="PantryPal logo" />
+    </a>
+<nav class="app-nav" aria-label="PantryPal navigation">
+      <a href="index.html" data-page="home">Home</a>
+      <a href="planner.html" data-page="planner">Planner</a>
+      <a href="ingredients.html" data-page="ingredients">Ingredients</a>
+      <a href="recipes.html" data-page="recipes">Recipes</a>
+      <a href="my-recipes.html" data-page="my-recipes">My Recipes</a>
+      <a href="groceries.html" data-page="groceries">Groceries</a>
+      <a href="favorites.html" data-page="favorites">Favorites</a>
+      <a href="case-study.html" data-page="case-study">Case Study</a>
+      <a href="articles.html" data-page="articles">Articles</a>
+    </nav>
+    <div class="account-nav" data-auth-nav></div>
+  </header>
+
+  <main class="app-page credits-page">
+    <section class="page-title">
+      <p class="eyebrow">Sources & licenses</p>
+      <h1>Recipe photo credits</h1>
+      <p>PantryPal uses recipe-specific food photography. It checks TheMealDB first because the photo is attached to a complete meal record with ingredients and instructions, then uses openly licensed media sources only when no sufficiently close TheMealDB match exists. Source information is saved with each resolved photo.</p>
+    </section>
+    <section class="credits-note">
+      <p><strong>How this works:</strong> PantryPal validates recipe names, important ingredients, and the primary food type before accepting a photo. TheMealDB is searched first. Wikimedia Commons and Openverse are fallback sources. If no candidate is trustworthy, PantryPal keeps a neutral local fallback rather than showing the wrong food.</p>
+      <p><strong>Recipe data:</strong> the 6,500 built-in recipes in this version come from the project recipe dataset so the titles, ingredient lists, and cooking steps are real recipe records instead of generated combinations.</p>
+    </section>
+    <section id="photoCreditsList" class="photo-credits-list" aria-live="polite"></section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand-logo"><img src="assets/pantrypal-nav-exact.png" alt="PantryPal" /></div>
+    <span class="footer-note">Static multipage demo • local account saves</span>
+    <nav class="footer-links" aria-label="PantryPal utility links">
+      <a class="footer-credit-link" href="data-tools.html">Data tools</a>
+      <a class="footer-credit-link" href="photo-credits.html">Photo credits & licenses</a>
+    </nav>
+    <span>© Alysha Pursley</span>
+  </footer>
+  <script src="data/recipes.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

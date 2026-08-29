@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Tools | PantryPal</title>
+  <meta name="description" content="Import, export, and back up PantryPal data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/pantrypal-app-icon.png" />
+  <link rel="apple-touch-icon" href="assets/pantrypal-app-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#23738D" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="theme-08-playful-poster" data-page="data-tools">
+<header class="site-header">
+    <a class="brand" href="index.html" aria-label="PantryPal home">
+      <img src="assets/pantrypal-nav-exact.png" alt="PantryPal logo" />
+    </a>
+<nav class="app-nav" aria-label="PantryPal navigation">
+      <a href="index.html" data-page="home">Home</a>
+      <a href="planner.html" data-page="planner">Planner</a>
+      <a href="ingredients.html" data-page="ingredients">Ingredients</a>
+      <a href="recipes.html" data-page="recipes">Recipes</a>
+      <a href="my-recipes.html" data-page="my-recipes">My Recipes</a>
+      <a href="groceries.html" data-page="groceries">Groceries</a>
+      <a href="favorites.html" data-page="favorites">Favorites</a>
+      <a href="case-study.html" data-page="case-study">Case Study</a>
+      <a href="articles.html" data-page="articles">Articles</a>
+    </nav>
+    <div class="account-nav" data-auth-nav></div>
+  </header>
+<main class="app-page">
+  <section class="page-title">
+    <p class="eyebrow">Data tools</p>
+    <h1>Keep your PantryPal data together.</h1>
+    <p>Back up the information you have saved in the app, restore it later, or use the individual import and export tools where you manage each type of data.</p>
+  </section>
+
+  <section class="content-card-grid">
+    <article class="panel big-panel">
+      <p class="eyebrow">Complete backup</p>
+      <h2>Export everything</h2>
+      <p class="muted">Creates one PantryPal backup containing your kitchen inventory, favorites, meal plan, custom recipes, grocery items, notes, and planner settings.</p>
+      <button id="exportAllDataButton" type="button">Export PantryPal backup</button>
+    </article>
+    <article class="panel big-panel">
+      <p class="eyebrow">Restore</p>
+      <h2>Import a PantryPal backup</h2>
+      <p class="muted">Restore a backup created by this version of PantryPal. Existing saved app data is replaced only after you confirm.</p>
+      <label class="file-button prominent-file-button">Choose backup file
+        <input id="importAllDataInput" type="file" accept=".json,application/json" hidden />
+      </label>
+    </article>
+  </section>
+
+  <section class="panel big-panel data-shortcuts">
+    <div>
+      <p class="eyebrow">Individual tools</p>
+      <h2>Only need one thing?</h2>
+      <p class="muted">The focused tools stay on the pages where they make the most sense.</p>
+    </div>
+    <div class="data-link-grid">
+      <a href="ingredients.html"><strong>Kitchen inventory</strong><span>Import or export ingredients and quantities.</span></a>
+      <a href="my-recipes.html"><strong>My Recipes</strong><span>Import or export recipes you created.</span></a>
+      <a href="planner.html"><strong>Meal plan</strong><span>Export your current weekly or monthly plan.</span></a>
+      <a href="groceries.html"><strong>Grocery list</strong><span>Export the list generated from planned meals.</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-brand-logo"><img src="assets/pantrypal-nav-exact.png" alt="PantryPal" /></div>
+    <span class="footer-note">Static multipage demo • local account saves</span>
+    <nav class="footer-links" aria-label="PantryPal utility links">
+      <a class="footer-credit-link" href="data-tools.html">Data tools</a>
+      <a class="footer-credit-link" href="photo-credits.html">Photo credits & licenses</a>
+    </nav>
+    <span>© Alysha Pursley</span>
+  </footer>
+<script src="data/recipes.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

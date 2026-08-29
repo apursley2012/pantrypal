@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Articles | PantryPal</title>
+  <meta name="description" content="Practical articles about ingredient matching, grocery planning, recipe data, and the decisions behind PantryPal." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/pantrypal-app-icon.png" />
+  <link rel="apple-touch-icon" href="assets/pantrypal-app-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#23738D" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="theme-08-playful-poster" data-page="articles">
+<header class="site-header">
+  <a class="brand" href="index.html" aria-label="PantryPal home">
+    <img src="assets/pantrypal-nav-exact.png" alt="PantryPal logo" />
+  </a>
+  <nav class="app-nav" aria-label="PantryPal navigation">
+    <a href="index.html" data-page="home">Home</a>
+    <a href="planner.html" data-page="planner">Planner</a>
+    <a href="ingredients.html" data-page="ingredients">Ingredients</a>
+    <a href="recipes.html" data-page="recipes">Recipes</a>
+    <a href="my-recipes.html" data-page="my-recipes">My Recipes</a>
+    <a href="groceries.html" data-page="groceries">Groceries</a>
+    <a href="favorites.html" data-page="favorites">Favorites</a>
+    <a href="case-study.html" data-page="case-study">Case Study</a>
+    <a href="articles.html" data-page="articles" aria-current="page">Articles</a>
+  </nav>
+  <div class="account-nav" data-auth-nav></div>
+</header>
+
+<main class="app-page editorial-page articles-page">
+  <section class="page-title editorial-hero articles-hero">
+    <p class="eyebrow">Articles</p>
+    <h1>The decisions behind PantryPal</h1>
+    <p>I wanted these to be useful on their own, not filler about a project. They explain the problems I ran into, what I changed, and the logic I used to make PantryPal work more like something I would actually use.</p>
+  </section>
+
+  <nav class="article-index article-index--detailed" aria-label="Article index">
+    <a href="#ingredient-matching">
+      <span>01</span>
+      <div><strong>Matching ingredients without making people type perfectly</strong><small>Normalization, exact matches, and missing-ingredient limits</small></div>
+    </a>
+    <a href="#grocery-planning">
+      <span>02</span>
+      <div><strong>Building a grocery list that does not make people buy food twice</strong><small>Connecting pantry inventory, meal planning, and groceries</small></div>
+    </a>
+    <a href="#recipe-data">
+      <span>03</span>
+      <div><strong>Why recipe data quality matters more than having a huge recipe count</strong><small>Photos, ingredients, fallbacks, and trustworthy results</small></div>
+    </a>
+  </nav>
+
+  <div class="article-reading-layout">
+    <aside class="article-reading-nav panel" aria-label="On this page">
+      <p class="eyebrow">On this page</p>
+      <a href="#ingredient-matching">Ingredient matching</a>
+      <a href="#grocery-planning">Grocery planning</a>
+      <a href="#recipe-data">Recipe data</a>
+      <a href="case-study.html">Read the full case study</a>
+    </aside>
+
+    <div class="article-stack">
+      <article id="ingredient-matching" class="standalone-article longform-article panel">
+        <header class="article-header">
+          <p class="eyebrow">Article 01 · Matching logic</p>
+          <h2>Matching ingredients without making people type perfectly</h2>
+          <p class="article-lead">If an app only understands an ingredient when somebody types it exactly the way the data expects, the app is making the person adapt to the code. I wanted PantryPal to do the opposite.</p>
+        </header>
+
+        <p>The main idea behind PantryPal is simple: tell it what food you already have and see what you can make. The annoying part is that ingredient names are not simple at all. A person can type <em>apple</em>, <em>apples</em>, <em>Apples</em>, or <em>APPLES</em> and mean exactly the same thing. Recipe data can also use slightly different forms of an ingredient, which means a straight string comparison can miss matches that are obvious to a person.</p>
+
+        <h3>I normalize before I compare</h3>
+        <p>The first thing I do is normalize ingredient input. I trim extra spacing, ignore capitalization, and reduce common variations to a consistent key before the matching logic runs. I also use the same normalization on the recipe side. That matters because normalizing only what the user types does not help if the recipe data is still being compared in a completely different form.</p>
+        <p>I kept the visible ingredient name separate from the comparison key. That lets the interface show a normal, readable label while the matching code works with a predictable value. It also keeps display concerns from leaking into the logic.</p>
+
+        <div class="article-callout">
+          <strong>The rule I used:</strong>
+          <p>Store the useful human-readable value, but compare a normalized key. Do not make the user memorize the spelling or format used by the dataset.</p>
+        </div>
+
+        <h3>An exact usable recipe should beat a prettier partial match</h3>
+        <p>Once ingredient names can be compared reliably, ranking becomes the next problem. A normal percentage score can look useful but still produce a bad recommendation. If one recipe uses everything in the pantry but another has a slightly higher weighted score and needs three extra ingredients, the second result may be less useful in the real situation.</p>
+        <p>So PantryPal treats complete matches as their own priority. Recipes the user can make with what they already have come first. After that, the user can decide how many missing ingredients are acceptable. Someone trying to spend nothing can choose no extra ingredients. Someone who is willing to pick up one or two things gets a wider set of results without being buried in recipes that require half a grocery trip.</p>
+
+        <h3>The missing-ingredient count is more useful than a vague score</h3>
+        <p>I still show match information, but I do not rely on a percentage by itself. “You have 8 of 10 ingredients” and “2 ingredients are missing” tell somebody what the recommendation actually means. That is a much more practical decision than asking them to interpret whether an 82% match is good enough.</p>
+        <p>This also made the grocery workflow easier later because the app already knows which ingredients are missing. The same information can continue into planning instead of being thrown away after the recipe card is rendered.</p>
+
+        <h3>Quick-add ingredients are part of the matching feature</h3>
+        <p>Input friction matters here too. If somebody has to type thirty common pantry items one at a time, the matching logic can be perfect and the feature can still be annoying to use. I added a set of common ingredients that can be toggled with one tap, while keeping the normal input for anything that is not listed.</p>
+        <p>The important part is that both paths go through the same normalization and storage logic. I did not want “quick add” to become a second version of the ingredient system with slightly different behavior.</p>
+
+        <h3>What I would keep in any similar app</h3>
+        <p>If I were building another search or recommendation feature from user-entered data, I would keep the same approach: normalize at the boundary, preserve the original display value, rank around the user’s real decision, and expose the reason a result is being shown. A recommendation is a lot easier to trust when the interface can explain it.</p>
+      </article>
+
+      <article id="grocery-planning" class="standalone-article longform-article panel">
+        <header class="article-header">
+          <p class="eyebrow">Article 02 · Connected workflows</p>
+          <h2>Building a grocery list that does not make people buy food twice</h2>
+          <p class="article-lead">A grocery list is easy to generate badly. Copying every ingredient from every planned recipe technically creates a list, but it ignores the most useful information PantryPal already has: what is in the kitchen.</p>
+        </header>
+
+        <p>I wanted the planner and grocery list to feel connected instead of looking like separate features that happen to live in the same app. If a person adds eggs, rice, onions, and cheese to their pantry, plans three meals, and then opens the grocery page, PantryPal should not tell them to buy those same ingredients again.</p>
+
+        <h3>I treat the grocery list as a difference, not a copy</h3>
+        <p>The generated grocery list is based on what planned recipes require minus what the user already has. That sounds obvious when it is written out, but it changes the whole implementation. The grocery page needs access to the planner data, recipe ingredients, and normalized pantry inventory. It cannot be a standalone checklist if I want it to produce a useful result.</p>
+        <p>The same ingredient matching rules have to be reused here. If the inventory says “tomatoes” and a recipe uses “tomato,” a simple text comparison could incorrectly add tomatoes to the grocery list. Shared normalization prevents the pages from disagreeing about the same ingredient.</p>
+
+        <div class="article-callout">
+          <strong>What made the feature click:</strong>
+          <p>The grocery list should answer “What am I missing?” instead of “What do these recipes contain?” Those are not the same question.</p>
+        </div>
+
+        <h3>Generated items and manual items need to coexist</h3>
+        <p>Meal ingredients are not the only things people buy. A useful grocery list also needs cereal somebody wants even though it is not attached to a recipe, cleaning supplies, snacks, pet food, drinks, or whatever else needs to come home. That is why PantryPal keeps manual grocery items alongside generated ones.</p>
+        <p>I also keep checked state persistent so the list does not reset because the page refreshed. Completed items can be cleared, and the list can be printed or exported. None of those pieces are complicated by themselves, but together they are what make it work outside of a demo click-through.</p>
+
+        <h3>I did not want automation to take control away</h3>
+        <p>Automatically generating a list is useful only if somebody can still understand and change it. I avoided treating the generated output as untouchable. The user can add what the app does not know about, check items off normally, and regenerate as their planning changes.</p>
+        <p>That is a pattern I would use in other apps too. Automation should remove repetitive work, not create a mystery state where the person has no idea why something happened.</p>
+
+        <h3>The data should keep working after the first screen</h3>
+        <p>This is one of the parts of PantryPal I care about most because it is where the project stops being a collection of pages. Ingredients influence recipe recommendations. Recipes go into the planner. The planner and pantry determine groceries. Favorites and custom recipes feed back into the same flow. Each step uses information the person already entered instead of asking for it again.</p>
+        <p>That kind of continuity is easy to miss when building one page at a time. I found it more useful to think in workflows: what is the person trying to do next, what does the app already know, and how much of that next step can be completed without another round of input?</p>
+      </article>
+
+      <article id="recipe-data" class="standalone-article longform-article panel">
+        <header class="article-header">
+          <p class="eyebrow">Article 03 · Data quality</p>
+          <h2>Why recipe data quality matters more than having a huge recipe count</h2>
+          <p class="article-lead">A recipe library can have thousands of rows and still feel broken if the ingredients are incomplete, the instructions are weak, or the photo belongs to an entirely different meal.</p>
+        </header>
+
+        <p>Recipe data was one of the parts of PantryPal that forced me to stop looking at quantity as the main measure of progress. A big library sounds impressive, but the number does not matter much when somebody opens a recipe and the image is wrong or the ingredients do not line up with the dish.</p>
+
+        <h3>A food photo is data, not decoration</h3>
+        <p>At first it is tempting to treat recipe images as a visual layer. In practice, the image is making a claim about the recipe. If the card says chicken casserole and shows a hamburger, the result looks unreliable before the user even reads it.</p>
+        <p>I changed the image workflow so exact dish matches are preferred and broader fallbacks are only used when a better match cannot be resolved. Photo attribution is also retained rather than separating the image from its source information. That makes the image system more work, but it also means the app has a way to explain where the image came from.</p>
+
+        <h3>Fallbacks need rules</h3>
+        <p>External data sources are useful, but blindly accepting the first result is not. PantryPal can use external recipe data when built-in results are not enough, but the returned recipe still needs to be compared against the user’s ingredients and ranked using the same logic as local recipes. Otherwise the fallback becomes a completely different experience.</p>
+        <p>I use progressively broader image searches for the same reason. Start with the exact recipe name, then add food context or leading ingredients if needed. A fallback should widen the search without abandoning what the original request meant.</p>
+
+        <div class="article-callout">
+          <strong>The data-quality lesson:</strong>
+          <p>A fallback is not just “anything is better than nothing.” It needs acceptance rules, source information, and a clear point where the app should admit that it does not have a strong match.</p>
+        </div>
+
+        <h3>The interface has to survive imperfect media</h3>
+        <p>Even a correct remote image can load slowly, arrive with a strange aspect ratio, or fail later. I made the recipe cards and detail views constrain the image area so the photo cannot expand over text or change the whole layout. Lazy loading and caching reduce unnecessary requests, while error handling keeps a failed image from breaking the card around it.</p>
+        <p>This is the kind of thing that is easy to miss when testing with a few perfect images on a desktop. It became much more obvious once I looked at lots of recipes and smaller screens.</p>
+
+        <h3>More data increases the need for validation</h3>
+        <p>As a dataset grows, edge cases stop being edge cases. A weird ingredient name, missing field, duplicate recipe, or bad image mapping that only affects one percent of records can become dozens of visible problems. That is why I added more defensive handling instead of assuming every record would be shaped exactly the same way.</p>
+        <p>I also keep custom recipes separate from the built-in data and combine them through a single recipe-access path. That lets the rest of the app work with both without mutating the base collection.</p>
+
+        <h3>What I would do before adding another thousand recipes</h3>
+        <p>I would improve validation, source quality, and match confidence before chasing a bigger number. I would rather have fewer recipes that are accurate and easy to use than a huge library that makes somebody double-check everything outside the app. For a tool built around helping people decide what to cook, trust is part of the feature.</p>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-brand-logo"><img src="assets/pantrypal-nav-exact.png" alt="PantryPal" /></div>
+  <span class="footer-note">Static multipage demo · local account saves</span>
+  <nav class="footer-links" aria-label="PantryPal utility links">
+    <a class="footer-credit-link" href="data-tools.html">Data tools</a>
+    <a class="footer-credit-link" href="photo-credits.html">Photo credits &amp; licenses</a>
+  </nav>
+  <span>© Alysha Pursley</span>
+</footer>
+<script src="data/recipes.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
