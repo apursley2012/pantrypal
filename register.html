@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account | PantryPal</title>
+  <meta name="description" content="Create a PantryPal account." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/pantrypal-app-icon.png" />
+  <link rel="preconnect" href="https://api.openverse.org">
+  <link rel="preconnect" href="https://commons.wikimedia.org">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="theme-08-playful-poster" data-page="register">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="PantryPal home">
+      <img src="assets/pantrypal-nav-exact.png" alt="PantryPal logo" />
+    </a>
+<nav class="app-nav" aria-label="PantryPal navigation">
+      <a href="index.html" data-page="home">Home</a>
+      <a href="planner.html" data-page="planner">Planner</a>
+      <a href="ingredients.html" data-page="ingredients">Ingredients</a>
+      <a href="recipes.html" data-page="recipes">Recipes</a>
+      <a href="my-recipes.html" data-page="my-recipes">My Recipes</a>
+      <a href="groceries.html" data-page="groceries">Groceries</a>
+      <a href="favorites.html" data-page="favorites">Favorites</a>
+      <a href="case-study.html" data-page="case-study">Case Study</a>
+      <a href="articles.html" data-page="articles">Articles</a>
+    </nav>
+    <div class="account-nav" data-auth-nav></div>
+  </header>
+  <main class="auth-page">
+    <div class="auth-brand-logo"><img src="assets/pantrypal-logo-wide.png" alt="PantryPal" /></div>
+    <section class="auth-card">
+      <p class="eyebrow">Save your PantryPal</p>
+      <h1>Create an account</h1>
+      <p>Your current guest data will be copied into the new account.</p>
+      <form id="registerForm" class="auth-form">
+        <label>Name<input id="registerName" type="text" autocomplete="name" required></label>
+        <label>Email<input id="registerEmail" type="email" autocomplete="email" required></label>
+        <label>Password<input id="registerPassword" type="password" autocomplete="new-password" required minlength="6"></label>
+        <label>Confirm password<input id="registerConfirm" type="password" autocomplete="new-password" required minlength="6"></label>
+        <p id="authMessage" class="auth-message" role="alert"></p>
+        <button class="primary-button" type="submit">Create account</button>
+      </form>
+      <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+    </section>
+  </main>
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault(); const msg=document.getElementById('authMessage'); msg.textContent='';
+      const password=document.getElementById('registerPassword').value;
+      if(password!==document.getElementById('registerConfirm').value){ msg.textContent='Passwords do not match.'; return; }
+      try { await PantryPalAuth.register({name:document.getElementById('registerName').value,email:document.getElementById('registerEmail').value,password}); location.href='index.html'; }
+      catch(err){ msg.textContent=err.message; }
+    });
+  </script>
+</body>
+</html>

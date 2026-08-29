@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Recipes | PantryPal</title><meta name="description" content="Create, edit, save, import, and export your own PantryPal recipes."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/pantrypal-app-icon.png"/><link rel="apple-touch-icon" href="assets/pantrypal-app-icon.png"/><link rel="manifest" href="site.webmanifest"/><meta name="theme-color" content="#23738D" /><link rel="stylesheet" href="css/styles.css"/></head>
+<body class="theme-08-playful-poster" data-page="my-recipes"><header class="site-header">
+    <a class="brand" href="index.html" aria-label="PantryPal home">
+      <img src="assets/pantrypal-nav-exact.png" alt="PantryPal logo" />
+    </a>
+<nav class="app-nav" aria-label="PantryPal navigation">
+      <a href="index.html" data-page="home">Home</a>
+      <a href="planner.html" data-page="planner">Planner</a>
+      <a href="ingredients.html" data-page="ingredients">Ingredients</a>
+      <a href="recipes.html" data-page="recipes">Recipes</a>
+      <a href="my-recipes.html" data-page="my-recipes">My Recipes</a>
+      <a href="groceries.html" data-page="groceries">Groceries</a>
+      <a href="favorites.html" data-page="favorites">Favorites</a>
+      <a href="case-study.html" data-page="case-study">Case Study</a>
+      <a href="articles.html" data-page="articles">Articles</a>
+    </nav>
+    <div class="account-nav" data-auth-nav></div>
+  </header>
+<main class="app-page"><section class="page-title"><p class="eyebrow">My Recipes</p><h1>Your recipe collection</h1><p>Add, edit, delete, import, and export your own recipes. They are included in ingredient matching, favorites, and the planner.</p></section>
+<section class="split-grid"><section class="panel big-panel"><h2 id="recipeFormHeading">Add a recipe</h2><form id="customRecipeForm" class="stack-form">
+<input id="customRecipeId" type="hidden"/><label>Recipe name<input id="customRecipeName" required placeholder="Chicken rice bowl"/></label>
+<div class="form-row"><label>Category<select id="customRecipeCategory"><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option><option>Dessert</option><option>Other</option></select></label><label>Servings<input id="customRecipeServings" type="number" min="1" value="2"/></label></div>
+<div class="form-row"><label>Prep time<input id="customRecipePrep" placeholder="10 min"/></label><label>Cook time<input id="customRecipeCook" placeholder="20 min"/></label></div>
+<label>Ingredients <small>One per line. Amounts are optional.</small><textarea id="customRecipeIngredients" required rows="7" placeholder="2 chicken breasts
+1 cup rice
+1 bell pepper"></textarea></label>
+<label>Instructions<textarea id="customRecipeInstructions" required rows="7" placeholder="Add one step per line or write full instructions."></textarea></label>
+<label>Notes<textarea id="customRecipeNotes" rows="3" placeholder="Optional notes, substitutions, or tips"></textarea></label>
+<div class="online-actions"><button type="submit">Save recipe</button><button id="cancelRecipeEdit" class="soft-button" type="button" hidden>Cancel edit</button></div></form></section>
+<section class="panel big-panel"><div class="panel-title-row"><div><h2>Saved recipes</h2><p class="muted">Stored locally on this device.</p></div><div class="online-actions"><button id="exportRecipesButton" class="soft-button" type="button">Export</button><label class="file-button">Import<input id="importRecipesInput" type="file" accept="application/json,.json" hidden/></label></div></div><div id="customRecipeList" class="match-list"></div></section></section></main>
+<dialog id="recipeDialog" class="recipe-dialog"><article class="dialog-card"><button id="closeRecipeDialog" class="dialog-close" type="button" aria-label="Close recipe">×</button><div class="dialog-image-wrap"><img id="dialogImage" src="" alt=""/></div><p id="dialogMeta" class="dialog-meta">Recipe</p><h2 id="dialogTitle"></h2><p id="dialogSummary"></p><div class="serving-controls"><button id="servingsDown" class="soft-button" type="button">−</button><strong id="dialogServings"></strong><button id="servingsUp" class="soft-button" type="button">+</button></div><div class="dialog-layout"><div><h3>Ingredients</h3><ul id="dialogIngredients"></ul></div><div><h3>Instructions</h3><ol id="dialogInstructionsList"></ol><div class="dialog-actions"><button id="dialogPlanButton" type="button">Add to next open slot</button><button id="dialogFavoriteButton" class="soft-button" type="button">Save favorite</button><button id="dialogPrintButton" class="soft-button" type="button">Print</button></div></div></div></article></dialog>
+<footer class="footer">
+    <div class="footer-brand-logo"><img src="assets/pantrypal-nav-exact.png" alt="PantryPal" /></div>
+    <span class="footer-note">Static multipage demo • local account saves</span>
+    <nav class="footer-links" aria-label="PantryPal utility links">
+      <a class="footer-credit-link" href="data-tools.html">Data tools</a>
+      <a class="footer-credit-link" href="photo-credits.html">Photo credits & licenses</a>
+    </nav>
+    <span>© Alysha Pursley</span>
+  </footer><script src="data/recipes.js"></script><script src="js/auth.js"></script><script src="js/app.js"></script>
+</body></html>
